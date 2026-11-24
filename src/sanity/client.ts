@@ -1,6 +1,6 @@
 import { createClient } from "next-sanity";
 
-import { apiVersion, dataset, hasSanity, projectId } from "./env";
+import { apiVersion, dataset, hasSanity, projectId, readToken } from "./env";
 
 /**
  * Shared read client. We use the CDN endpoint for fast, cached published
@@ -14,7 +14,10 @@ export const client = hasSanity
       projectId,
       dataset,
       apiVersion,
-      useCdn: true,
+      // Public datasets use the fast CDN; a token (for private datasets)
+      // switches to authenticated API reads.
+      useCdn: !readToken,
       perspective: "published",
+      token: readToken || undefined,
     })
   : null;
