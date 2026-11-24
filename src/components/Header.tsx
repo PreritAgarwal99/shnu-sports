@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { ChevronDown, Menu, X, Phone } from "lucide-react";
 import type { Sport, SiteSettings } from "@/sanity/types";
 import { telLink } from "@/lib/site";
@@ -17,7 +17,6 @@ export function Header({
   const [open, setOpen] = useState(false);
   const [sportsOpen, setSportsOpen] = useState(false);
   const pathname = usePathname();
-  const router = useRouter();
 
   // On the home page, the logo smoothly returns to the hero; elsewhere it
   // navigates home.

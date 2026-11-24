@@ -11,11 +11,9 @@ type Sort = "featured" | "price-asc" | "price-desc" | "name";
 export function CatalogView({
   products,
   categories,
-  basePath,
 }: {
   products: ProductCardType[];
   categories?: Category[];
-  basePath: string;
 }) {
   const sp = useSearchParams();
   const router = useRouter();

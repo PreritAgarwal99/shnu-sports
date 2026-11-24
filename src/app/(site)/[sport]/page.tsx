@@ -61,11 +61,7 @@ export default async function SportPage({
       </header>
 
       <Suspense fallback={<div className="py-20 text-center text-muted">Loading gear…</div>}>
-        <CatalogView
-          products={products}
-          categories={sport.categories}
-          basePath={`/${sport.slug}`}
-        />
+        <CatalogView products={products} categories={sport.categories} />
       </Suspense>
     </div>
   );

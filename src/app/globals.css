@@ -18,7 +18,8 @@
 
   --color-foreground: #f5f4f1;
   --color-muted: #a6a29b;
-  --color-muted-2: #76726b;
+  /* Lightened to meet WCAG AA (4.5:1) on dark surfaces for small secondary text. */
+  --color-muted-2: #908c84;
 
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-serif: var(--font-cormorant), ui-serif, Georgia, serif;

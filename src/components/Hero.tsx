@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
@@ -9,10 +9,11 @@ import { Media } from "./Media";
 import type { Banner } from "@/sanity/types";
 
 export function Hero({ banners }: { banners: Banner[] }) {
-  const autoplay = useRef(
-    Autoplay({ delay: 5000, stopOnInteraction: false, stopOnMouseEnter: true }),
+  const autoplay = useMemo(
+    () => Autoplay({ delay: 5000, stopOnInteraction: false, stopOnMouseEnter: true }),
+    [],
   );
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [autoplay.current]);
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [autoplay]);
   const [selected, setSelected] = useState(0);
 
   const onSelect = useCallback(() => {
@@ -21,10 +22,12 @@ export function Hero({ banners }: { banners: Banner[] }) {
 
   useEffect(() => {
     if (!emblaApi) return;
-    onSelect();
+    // Sync via embla's own events (avoids a synchronous setState in the effect body).
     emblaApi.on("select", onSelect);
+    emblaApi.on("reInit", onSelect);
     return () => {
       emblaApi.off("select", onSelect);
+      emblaApi.off("reInit", onSelect);
     };
   }, [emblaApi, onSelect]);
 

@@ -95,6 +95,9 @@ Hit **Publish**. With the webhook configured (below), the live site updates with
 
 ## Deploy to Vercel (free) + your domain
 
+> 📘 **Full step-by-step runbook — including giving other people admin access —
+> is in [`docs/GOING-LIVE.md`](docs/GOING-LIVE.md).** Short version below.
+
 1. Push this repo to GitHub.
 2. At **https://vercel.com** → **New Project** → import the repo (framework auto-detected).
 3. Add the **Environment Variables** from `.env.local` (Project ID, dataset, revalidate
@@ -140,6 +143,20 @@ Every product has **Enquire on WhatsApp** (opens a prefilled chat), **Call**, an
   (change the gold in one place and it updates everywhere).
 
 ---
+
+## Testing
+
+Automated tests cover the functional CTAs and flows (WhatsApp/Call/Enquire, navigation,
+filtering, forms, SEO endpoints, accessibility).
+
+```bash
+pnpm test        # unit tests (Vitest)
+pnpm test:e2e    # end-to-end (Playwright — auto-starts an isolated sample-data server)
+pnpm test:all    # both
+```
+
+Full details, coverage and how to extend the suite: **[`docs/TESTING.md`](docs/TESTING.md)**.
+CI runs lint + unit + e2e on every push/PR (`.github/workflows/ci.yml`).
 
 ## Swapping the placeholder art
 

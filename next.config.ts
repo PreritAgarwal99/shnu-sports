@@ -1,6 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Lets the E2E test server build into an isolated dir (so it never clashes
+  // with a running `next dev`). Defaults to the normal `.next`.
+  distDir: process.env.NEXT_DIST_DIR || ".next",
   // Allow Tailwind v4 to process CSS through Turbopack (used by both `dev` and `build`).
   turbopack: {
     rules: {
